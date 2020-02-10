@@ -75,18 +75,12 @@ public class CustomerController {
 	}
 	
 
-	@PutMapping("/upgradeCustomer/{id}")
+	@PutMapping("/upgrade/{id}")
 	public ResponseEntity<Response<Customer>> upgrade(@PathVariable(name = "id") Long id,
 			@Valid @RequestBody Customer customer, BindingResult result) {
 		Response<Customer> response = new Response<>();
 		Optional<Customer> ctm = service.findById(id);
 		log.info("Upgrade customer.");
-
-//		if (customer.getName().isEmpty() || customer.getName() == null) {
-//			log.info("Preencha o nome.");
-//			response.getErrors().add("Preencha o nome.");
-//			return ResponseEntity.badRequest().body(response);
-//		}
 
 		if (ctm.get().getId().equals(customer.getId())) {
 			if (result.hasErrors()) {
